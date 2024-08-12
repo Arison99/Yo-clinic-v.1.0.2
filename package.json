@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< Updated upstream
+=======
+    "django-vite-plugin": "^4.0.1",
+    "headless": "^1.2.0",
+>>>>>>> Stashed changes
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

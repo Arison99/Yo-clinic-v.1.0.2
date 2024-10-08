@@ -41,7 +41,7 @@ function Navbar () {
   
                    <Link to="/Appointments" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Appointments </Link>
   
-                   <Link to="/Ambulance" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Ambulance </Link>
+                   <Link to="./Ambulance" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Ambulance </Link>
 
                    <div>
                     {isLoggedIn ? (

@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch, useDispatch, useSelector } from "react-redux";
-import { requestAmbulanceSuccess } from './redux/reducers/ambulanceReducer';
+import {  useDispatch, useSelector } from "react-redux";
+import { requestAmbulanceSuccess } from '../Reducers/ambulanceReducer';
 
 
 const Ambulance = () => {
@@ -29,7 +29,7 @@ const Ambulance = () => {
                 </div>
                 <button
                     class="mt-6 bg-red-500 text-white px-6 py-3 rounded-lg"
-                    onClick={() => dispatchEvent(requestAmbulanceSuccess({ id: 1, daye: '2024-09-10', status: 'Pending' }))}
+                    onClick={() => dispatch(requestAmbulanceSuccess({ id: 1, daye: '2024-09-10', status: 'Pending' }))}
                     >
                         Request Ambulance
                         

@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.contrib.auth.models import User
 from django.http import Http404
 
 #User_Table Structure
@@ -67,3 +68,47 @@ class UserManager(BaseUserManager):
         User.is_superuser =True
         User.is_staff = True
         User.save(using=self._db)
+
+
+class Patient(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    age = models.IntegerField()
+    medical_history = models.TextField()
+    current_medication = models.TextField()
+
+    def __str__(self):
+        return self.user.username
+
+
+class Medication(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+    def __str__(self):
+        return self.name
+    
+
+
+class Appointment(models.Model):
+    patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='appointments')
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='doctor_appontments')
+    date = models.DateField()
+    time = models.TimeField()
+    reason = models.TextField()
+
+    def __str__(self):
+        return f'{self.patient.username} - {self.doctor.username} ({self.date})'
+    
+
+
+class AmbulanceRequest(models.Model):
+    patient = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=255)
+    urgency = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, default="Pending")
+
+    def __str__(self):
+        return f'{self.patient.username} - {self.urgency}'
+    

@@ -1,7 +1,7 @@
 import React, { useEffect} from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAppointmentsStart, fetchAppointmentsSuccess, fetchAppointmentsFailure, bookAppointmentsSuccess } from './redux/reducers/appointmentsREducer';
+import { fetchAppointmentsStart, fetchAppointmentsFailure } from '../Reducers/appointmentsReducer';
 
 
 function Appointments () {
@@ -18,7 +18,7 @@ function Appointments () {
                 },
             });
             dispatch(fetchAppointmentsStart(response.data));
-        } Catch (error) {
+        } catch (error) {
             dispatch(fetchAppointmentsFailure(response.error));
         }
       };

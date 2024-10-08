@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { bookAppointmentSuccess } from './redux/reducers/appointmentsReducer';
+import { bookAppointmentSuccess } from '../Reducers/appointmentsReducer';
 
 
 const BookAppointment = () => {
@@ -29,7 +29,7 @@ const BookAppointment = () => {
                 }
             );
             dispatch(bookAppointmentSuccess(response.data));
-        } Catch (error) {
+        } catch (error) {
             console.error('Error booking Appointment', error);
         }
     };

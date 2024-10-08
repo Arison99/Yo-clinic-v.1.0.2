@@ -1,5 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit"; 
 
+// authReducer.js
+
+const initialState = {
+    user: null,  // user will contain role information
+    token: null,
+};
+
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
+//Action to set user and token
+export function authReducer(state = initialState, action) {
+    switch (action.type) {
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload.user,  // Store user with role info
+                token: action.payload.token,
+            };
+            default:
+                return state;
+    }
+}
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: {

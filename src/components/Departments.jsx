@@ -16,7 +16,7 @@ function Departments () {
             <div class="flex-col  flex justify-center items-center">
                 <div class="flex-shrink-0">
                     <a href="#" class="relative block">
-                        <img alt="profil" src="/images/person/4.jpg" class="mx-auto object-cover rounded-full h-20 w-20 "/>
+                        <img alt="profil" src="src/Images/p5.jpg" class="mx-auto object-cover rounded-full h-20 w-20 "/>
                     </a>
                 </div>
                 <div class="mt-2 text-center flex flex-col">

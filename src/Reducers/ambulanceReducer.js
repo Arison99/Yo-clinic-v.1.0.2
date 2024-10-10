@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const ambulanceSlice = createSlice({
-    name:'ambulance',
+    name: 'ambulance',
     initialState: {
         requests: [],
         loading: false,
@@ -11,13 +11,11 @@ const ambulanceSlice = createSlice({
         requestAmbulanceStart: (state) => {
             state.loading = true;
         },
-
-        requstAmbulanceSuccess: (state, action) => {
+        requestAmbulanceSuccess: (state, action) => { // Fixed typo here
             state.requests.push(action.payload);
-            state.loading = action.payload;
+            state.loading = false; // Fixed the incorrect assignment
             state.error = null;
         },
-
         requestAmbulanceFailure: (state, action) => {
             state.error = action.payload;
             state.loading = false;
@@ -27,7 +25,7 @@ const ambulanceSlice = createSlice({
 
 export const {
     requestAmbulanceStart,
-    requstAmbulanceSuccess,
+    requestAmbulanceSuccess, // Fixed typo here
     requestAmbulanceFailure,
 } = ambulanceSlice.actions;
 

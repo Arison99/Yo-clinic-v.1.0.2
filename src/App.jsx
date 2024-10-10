@@ -13,7 +13,7 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <Router>
-    <div class="flex flex-col min-h-screen">
+    <div>
         <Navbar/>
         <>
             <Routes>

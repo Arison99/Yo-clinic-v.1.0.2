@@ -8,7 +8,7 @@ function Home () {
          <div class="flex flex-col lg:flex-row lg:items-stretch lg:min-h-[800px]">
             <div class="relative flex items-center justify-center w-full lg:order-2 lg:w-7/12">
            <div class="absolute bottom-0 right-0 hidden lg:block">
-               <img class="object-contain w-auto h-48" src="./Images/hero_1.png" alt="" />
+               <img class="object-contain w-auto h-48" src="hero_1.png" alt="" />
            </div>
   
            <div class="relative px-4 pt-24 pb-16 text-center sm:px-6 md:px-24 2xl:px-32 lg:py-24 lg:text-left">
@@ -45,13 +45,13 @@ function Home () {
            </div>
   
            <div class="absolute right-0 z-10 -bottom-16 lg:top-24 lg:-left-20">
-               <img class="w-32 h-32 md:w-40 md:h-40" src="./Images/Logo.png" alt="" />
+               <img class="w-32 h-32 md:w-40 md:h-40" src="Logo.png" alt="" />
            </div>
        </div>
   
        <div class="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
            <div class="absolute inset-0">
-               <img class="object-cover w-full h-full scale-150" src="./Images/hero_1.png" alt="" />
+               <img class="object-cover w-full h-full scale-150" src="hero_1.png" alt="" />
            </div>
   
            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>

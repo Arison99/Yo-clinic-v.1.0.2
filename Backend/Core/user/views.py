@@ -7,17 +7,17 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken 
 from rest_framework_simplejwt.views import TokenObtainPairView
-from yaml import serialize
+from yaml import serializer
 from .models import Medication, Patient
 from .models import Appointment
 from .models import AmbulanceRequest
-from .models import PatientRecord
+from .models import Patient
 from .Serializers import AppointmentSerializer, PatientSerializer
 from .Serializers import MedicationSerializer
 from .permissions import IsDoctor
 from .permissions import IsDoctorOrReadOnly
-from .Serializers import AmbulanceRequestSerializer
-from .Serializers import PatientRecordSerializer
+from .Serializers import AmbulanceRequestsSerializer
+from .Serializers import PatientSerializer
 
 
 @api_view(['POST'])
@@ -75,7 +75,7 @@ class ApppointmentViewSet(viewsets.ModelViewSet):
 
 class AmbulanceRequestViewSet(viewsets.ModelViewSet):
     queryset = AmbulanceRequest.objects.all()
-    serializer_class = AmbulanceRequestSerializer
+    serializer_class = AmbulanceRequestsSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):

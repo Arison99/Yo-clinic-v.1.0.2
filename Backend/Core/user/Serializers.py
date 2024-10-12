@@ -1,8 +1,8 @@
 from dataclasses import fields
 from attr import field
 from rest_framework import serializers
-from .models import AmbulanceRequest, Appointment, Patient
-from .views import Medication
+from .models import AmbulanceRequest, Appointment, Patient, Medication
+
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:

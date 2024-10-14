@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from yaml import serializer
@@ -21,20 +21,21 @@ from .Serializers import PatientSerializer
 
 
 @api_view(['POST'])
-def register_user(request):
-    role=request.data.get('role')
-    if role not in ['Doctor', 'Patient']:
-        return Response({'error': 'Invald role'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    user = User.objects.create_user(
-        username=request.data['username'],
-        password=request.data['password'],
-        email=request.data['email']
-    )
-    user.profile.role = role #Assuming a Profile model extending the user model
-    user.save()
-    return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
-
+def signin(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'user': {
+                'id': user.id,
+                'email': user.email,
+                'username': user.username,
+            },
+            'token': str(refresh.access_token),
+        })
+    return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class MedicationsViewSet(viewsets.ModelViewSet):

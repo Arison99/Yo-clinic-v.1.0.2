@@ -1,90 +1,85 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../Store/authSlice";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../reducers/authReducer';
+import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup'; // Ensure this import is correct
 
 const SignIn = () => {
-    const [name, setName]  = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const error = useSelector((state) => state.auth.error);
+    const loading = useSelector((state) => state.auth.loading);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(loginUser({ name, email, password}));
+    const initialValues = {
+        email: '',
+        password: '',
     };
-    
-    return(
-        // Sign in page
-     <form onSubmit={handleSubmit} 
-            className="max-w-xl mx-auto mt-8 bg-white lg:mx-0
-                    sm:bg-transparent lg:mt-12 rounded-xl">
-            <div>
-            <div>
-                <label htmlFor="Name" className="">
-                </label>
-                    <input 
-                     type="text"
-                     name="Name"
-                     value={name}
-                     onChange={(e) => setName(e.target.value)}
-                     id="Name"
-                     placeholder="Enter Full Name"
-                     className="block w-full px-4 py-4 text-base text-center
-                             text-black placeholder-gray-500 transition-all
-                             duration-200 border-transparent sm:text-left 
-                             focus:border-transparent focus:ring-0 caret-orange-500 "
-                             required />
-    
+
+    const validationSchema = Yup.object({
+        email: Yup.string().email('Invalid email address').required('Required'),
+        password: Yup.string().required('Required'),
+    });
+
+    const handleSubmit = async (values, { setSubmitting }) => {
+        dispatch(signInStart());
+        try {
+            const response = await axios.post('http://localhost:8080/api/auth/signin', values);
+            dispatch(signInSuccess(response.data));
+        } catch (err) {
+            dispatch(signInFailure(err.response.data.message));
+        }
+        setSubmitting(false);
+    };
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="max-w-md w-full bg-white shadow-md rounded-lg p-6">
+                <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmit}
+                >
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div className="mb-4">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                                    Email
+                                </label>
+                                <Field
+                                    type="email"
+                                    name="email"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                                <ErrorMessage name="email" component="div" className="text-red-500 text-xs italic" />
+                            </div>
+                            <div className="mb-6">
+                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                    Password
+                                </label>
+                                <Field
+                                    type="password"
+                                    name="password"
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                />
+                                <ErrorMessage name="password" component="div" className="text-red-500 text-xs italic" />
+                            </div>
+                            {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
+                            <div className="flex items-center justify-between">
+                                <button
+                                    type="submit"
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    disabled={isSubmitting || loading}
+                                >
+                                    {loading ? 'Signing in...' : 'Sign In'}
+                                </button>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
-                <div className="p-4 sm:p-2 sm:bg-white sm:border-2 
-                            sm:border-transparent sm:rounded-full 
-                            sm:focus-within:border-orange-500 sm:focus-within:ring-1 
-                            sm:focus-within:ring-orange-500">
-                <label htmlFor="Email" className="sr-only">
-                </label> 
-                    <input 
-                    type="email"
-                    name="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    id="Email"
-                    placeholder="Enter e-mail to get started"
-                    className="block w-full px-4 py-4 text-base text-center
-                            text-black placeholder-gray-500 transition-all
-                            duration-200 border-transparent sm:text-left 
-                            focus:border-transparent focus:ring-0 caret-orange-500 "
-                            required />
-                    
-                
-            </div>
-            <div>
-                <label htmlFor="Password" className="">
-                </label>
-                    <input 
-                     type="password"
-                     name="Password"
-                     value={password}
-                     onChange={(e) => setPassword(e.target.value)}
-                     id="Password"
-                     placeholder="Enter password"
-                     className="block w-full px-4 py-4 text-base text-center
-                             text-black placeholder-gray-500 transition-all
-                             duration-200 border-transparent sm:text-left 
-                             focus:border-transparent focus:ring-0 caret-orange-500 "
-                             required />
-    
-            </div>
-            <button type="submit" className="inline-flex items-center justify-center w-full px-4 py-4 mt-4 font-semibold text-white transition-all duration-200 bg-orange-500 border border-transparent rounded-full sm:w-auto sm:ml-4 sm:mt-0 hover:bg-orange-600 focus:bg-orange-600">
-                               Sign In
-                           </button>
-           
-            </div>
-           
-           
-     </form>
-       
-    )
-}
+        </div>
+    );
+};
 
 export default SignIn;

@@ -1,33 +1,52 @@
-# React + Vite + Tailwind.css + Django
+<h1>React + Vite + Tailwind.css + Django</h1>
 
-1. Open Yo-Clinic via the cmd
+<ol>
+  <li>Open Yo-Clinic via the cmd.</li>
+  <li>Make sure Node.js is installed on your PC.</li>
+</ol>
 
-2. Make sure Node.js is installed on yo' PC.
+<p><strong>Note:</strong> For other Operating Systems, read the manual of the packages used. I don't like it when you get lost. Contact me at <a href="mailto:byonanebye.arison@student.utamu.ac.ug">byonanebye.arison@student.utamu.ac.ug</a> or <a href="mailto:harrisondaviinci@gmail.com">harrisondaviinci@gmail.com</a>.</p>
 
-Note: For other Operating Systems,RTFM of the packages used,i don't like it when you get lost. Contact me at byonanebye.arison@student.utamu.ac.ug/harrisondaviinci@gmail.com
+<ol start="3">
+  <li>Install Vite using:</li>
+</ol>
 
-3. Install Vite using
-   Windows
+<pre>
+<strong>Windows:</strong>
 npm install vite@latest
 
-   Other OS
+<strong>Other OS:</strong>
 yarn install vite
+</pre>
 
-4. Install React
+<ol start="4">
+  <li>Install React:</li>
+</ol>
+
+<pre>
 npm install React
-   Other OS
 
+<strong>Other OS:</strong>
 yarn install React
-5.Install Tailwind.css
+</pre>
+
+<ol start="5">
+  <li>Install Tailwind.css:</li>
+</ol>
+
+<pre>
 npm install -D tailwindcss
 npx tailwindcss init
+</pre>
 
-Visit www.tailwindcss.com, read and follow the Manual(RTFM)
+<p>Visit <a href="https://www.tailwindcss.com">www.tailwindcss.com</a>, read and follow the Manual (RTFM).</p>
 
-6. To run the Application during development, use
+<ol start="6">
+  <li>To run the Application during development, use:</li>
+</ol>
 
+<pre>
 npm run dev
+</pre>
 
-7.Vite will open the server on port 5172
-
-press o + enter to open in the browser.
+<p>Vite will open the server on port 5172. Press <code>o</code> + <code>enter</code> to open in the browser.</p>
